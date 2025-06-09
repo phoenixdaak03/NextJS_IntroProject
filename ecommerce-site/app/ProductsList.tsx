@@ -10,7 +10,7 @@ export default function ProductsList({ products, initialCartProducts }: { produc
     
     
     async function addToCart(productID: string){
-        const response = await fetch('https://vigilant-spoon-qrpqq9wr56vc44qv-3000.app.github.dev/api/users/2/cart', {
+        const response = await fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/users/2/cart', {
             method: 'POST',
             body: JSON.stringify({
                 productID,
@@ -25,7 +25,7 @@ export default function ProductsList({ products, initialCartProducts }: { produc
     }
 
     async function removeFromCart(productID: string){
-        const response = await fetch('https://vigilant-spoon-qrpqq9wr56vc44qv-3000.app.github.dev/api/users/2/cart', {
+        const response = await fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/users/2/cart', {
             method: 'DELETE',
             body: JSON.stringify({
                 productID,

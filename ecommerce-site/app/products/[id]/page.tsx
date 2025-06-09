@@ -1,8 +1,10 @@
 import NotFoundPage from '@/app/not-found';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductDetailPage({ params }: { params: { id: string }}){
     
-    const response = await fetch('https://vigilant-spoon-qrpqq9wr56vc44qv-3000.app.github.dev//api/products/' + params.id);
+    const response = await fetch(process.env.NEXT_PUBLIC_SITE_URL + '//api/products/' + params.id);
     const product = await response.json();
     
     if (!product){
