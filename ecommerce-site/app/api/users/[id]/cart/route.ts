@@ -1,5 +1,4 @@
 import { NextRequest } from 'next/server';
-import { products } from '@/app/product-data';
 import { connectToDB } from '@/app/api/db';
 
 type ShoppingCart = Record<string, string[]>;
@@ -16,8 +15,8 @@ type Params = {
 
 export async function GET(request: NextRequest, { params }: { params: Params }){
     const { db } = await connectToDB();
-
-    const userId = params.id;
+    const params1 = await params;
+    const userId =  params1.id;
     const userCart = await db.collection('carts').findOne({ userId })
 
     if (!userCart){
@@ -45,7 +44,9 @@ type CartBody = { productID: string };
 export async function POST(request: NextRequest, { params }: { params: Params }){
     const { db } = await connectToDB();
 
-    const userId = params.id;
+    const params1 = await params;
+
+    const userId = params1.id;
     const body: CartBody = await request.json();
     const productID = body.productID;
 
@@ -68,8 +69,8 @@ export async function POST(request: NextRequest, { params }: { params: Params })
 export async function DELETE(request: NextRequest, { params }: { params: Params }){
     const { db } = await connectToDB();
 
-
-    const userId = params.id;
+    const params1 = await params;
+    const userId = params1.id;
     const body= await request.json();
     const productID = body.productID; // getting the product id to del from cart
 

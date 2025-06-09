@@ -1,8 +1,9 @@
-import { products } from '@/app/product-data';
 import NotFoundPage from '@/app/not-found';
 
-export default function ProductDetailPage({ params }: { params: { id: string }}){
-    const product = products.find(p => p.id === params.id);
+export default async function ProductDetailPage({ params }: { params: { id: string }}){
+    
+    const response = await fetch('https://vigilant-spoon-qrpqq9wr56vc44qv-3000.app.github.dev//api/products/' + params.id);
+    const product = await response.json();
     
     if (!product){
         return <NotFoundPage />;
